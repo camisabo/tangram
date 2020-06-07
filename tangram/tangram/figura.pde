@@ -45,9 +45,22 @@ class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
   void Rotacion() {
     if (keyPressed && key=='+' && click) {
       angulo ++;
+      println(angulo);
     } else if (keyPressed && key=='-' && click) {
       angulo --;
+      println(angulo);
+    } else {
+      for (int i = 0; i <= 8; i++) {
+        if (((i*45)-10 <= angulo) && (angulo <=(i*45)+10)) {
+          angulo = i*45;
+        }
+      }
     }
+    if (angulo < 0) {
+      angulo = 359;
+    } else if (angulo >= 360) {
+      angulo = 0;
+    } 
     rotate(radians(angulo));
   }
 
@@ -70,11 +83,12 @@ class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 
   void move() {
+    x = constrain(x,0,width);
+    y = constrain(y,0,height);
     if (green(mycolor)==green(c)) {
       if (mousePressed && mouseButton == LEFT && click) {
         x= mouseX;
         y = mouseY;
-        println(this,x,y);
       }
     }
   }
@@ -85,7 +99,7 @@ class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
         puntos[i][0] *=-1;
         ATime=false;
       }
-    }else if(ATime==false && !mousePressed){
+    } else if (ATime==false && !mousePressed) {
       ATime=true;
     }
   }
