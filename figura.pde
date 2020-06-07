@@ -1,4 +1,4 @@
-class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
   color c; // color
   color ce; //color mutable
   float[][] puntos;
