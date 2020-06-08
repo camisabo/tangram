@@ -12,8 +12,8 @@ float[][] cuadra = {{17.67*escala, 17.67*escala}, {-17.67*escala, 17.67*escala},
 float[][] datos2 = {{-25*escala, -12.5*escala}, {25*escala, -12.5*escala}, {0, 12.5*escala}};
 float[][] datos3 = {{-35.34*escala, -17.67*escala}, {35.34*escala, -17.67*escala}, {0, 17.67*escala}};
 float[][] Rtor = {{-12.5*escala, 12.5*escala}, {12.5*escala, 37.5*escala}, {12.5*escala, -12.5*escala}, {-12.5*escala, -37.5*escala}};
-PImage prueba;
-
+PImage nivel;
+int maxLvl;
 void setup() {
   //surface.setResizable(true);
   size(600, 600);
@@ -28,32 +28,37 @@ void setup() {
 
 
   //cargador de imagen
-  prueba = loadImage("data/prueba.png");
 }
 void draw() {
+  int LvLnum = 0;
+  nivel = loadImage("data/nivel"+LvLnum+".png");
   background(1);
   
   //procesador de imagen
+  int blanco =0;
   loadPixels();
-  prueba.loadPixels();
+  nivel.loadPixels();
   for (int x = 0; x < width; x++) {
     for (int y = 0; y< height; y++) {
       int loc = x+y*width;
-      float r = red (prueba.pixels[loc]);
-      float g = green (prueba.pixels[loc]);
-      float b = blue (prueba.pixels[loc]);
-      
+      float r = red (nivel.pixels[loc]);
       if (r <= 1){
         pixels[loc] = color(1,255);
       }else{
         pixels[loc] = color(255,255,255);
+        blanco++;
       }
     }
   }
+  
   updatePixels();
+  println(blanco);
   Funcion_iniciadora();
+  //creador de niveles
   if (keyPressed && key=='p'){
    
-   save("data/prueba.png");
+   save("data/nivel"+maxLvl+".png");
+   maxLvl++;
    }
+   
 }
