@@ -45,10 +45,10 @@ class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
   void Rotacion() {
     if (keyPressed && key=='+' && click) {
       angulo ++;
-      println(angulo);
+      move = true;
     } else if (keyPressed && key=='-' && click) {
       angulo --;
-      println(angulo);
+      move = true;
     } else {
       for (int i = 0; i <= 8; i++) {
         if (((i*45)-10 <= angulo) && (angulo <=(i*45)+10)) {
@@ -66,7 +66,6 @@ class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   //reconocedor del color como selector
   void seleccion() {
-    // println(green(ce));
     mycolor=get(mouseX, mouseY);
     if (green(mycolor)!=green(c) && mousePressed && mouseButton == LEFT) {
       click = false;
@@ -83,13 +82,16 @@ class Figura { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 
   void move() {
-    x = constrain(x,0,width);
-    y = constrain(y,0,height);
+    x = constrain(x, 0, width);
+    y = constrain(y, 0, height);
     if (green(mycolor)==green(c)) {
       if (mousePressed && mouseButton == LEFT && click) {
         x= mouseX;
         y = mouseY;
+        move = true;
       }
+    } else {
+      move = false;
     }
   }
   //cambiar la orientacion de la figura
