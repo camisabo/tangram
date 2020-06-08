@@ -25,24 +25,35 @@ void setup() {
   triangulo = new Figura(color (164, 0, 0), 0, datos, 200, 150);//250 225
   cuadrado = new Figura(color(200, 72, 0), 45, cuadra, 200, 250);//250 275
   Rtorcido = new Figura(color(200, 216, 0), 0, Rtor, 125, 175);//215 240
-  
-  
+
+
   //cargador de imagen
-  prueba = loadImage("data/prueba.jpg");
-  
+  prueba = loadImage("data/prueba.png");
 }
 void draw() {
   background(1);
-  //image(prueba,0,0);
+  
+  //procesador de imagen
+  loadPixels();
   prueba.loadPixels();
-  prueba.updatePixels();
-  stroke(255);
-  line(width/2, 0, width/2, height);
-  line(0, height/2, width, height/2);
+  for (int x = 0; x < width; x++) {
+    for (int y = 0; y< height; y++) {
+      int loc = x+y*width;
+      float r = red (prueba.pixels[loc]);
+      float g = green (prueba.pixels[loc]);
+      float b = blue (prueba.pixels[loc]);
+      
+      if (r <= 1){
+        pixels[loc] = color(1,255);
+      }else{
+        pixels[loc] = color(255,255,255);
+      }
+    }
+  }
+  updatePixels();
   Funcion_iniciadora();
-  /*if (keyPressed && key=='p'){
-    
-    save("data/prueba2.jpg");
-  }*/
-  //verificacion 
+  if (keyPressed && key=='p'){
+   
+   save("data/prueba.png");
+   }
 }
